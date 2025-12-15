@@ -3,6 +3,32 @@ Questie-335 Ascension Edition
 CHANGELOG
 ========================================
 
+Version 9.5.1-ascension-v1.0.2 (December 15, 2025)
+--------------------------------------------------------
+BUG FIXES:
+  * Fixed "attempt to index field 'npcData' (a string value)" error during initialization
+  * Added type checking for npcData before accessing it as a table
+  * Fixed FixMapCoordinates() to verify database is loaded before applying fixes
+  * Fixed dynamic NPC collection to check database state
+  * Fixed "/questie ascension export" command crash
+  * Removed addon folder name restriction - now supports both:
+    - "Questie-335" (original name)
+    - "Questie-335-ascension" (new name)
+  * Removed non-Ascension realm names from detection:
+    - Removed: Laughing Skull, Sargeras, Andorhal (not Ascension servers)
+
+FEATURES:
+  * Flexible addon folder naming - works with any valid name variant
+  * Confirmed map coordinate fixes only for Map ID 1519 (Stormwind +6.8, +10.1)
+
+TECHNICAL CHANGES:
+  * Added type safety checks in AscensionLoader.lua
+  * Improved error handling for database access
+  * Better initialization sequence validation
+  * Updated VersionCheck.lua to allow multiple folder names
+  * Verified coordinate offset logic matches pfQuest-ascension exactly
+
+
 Version 9.5.1-ascension-v1.0.1-beta (December 15, 2025)
 --------------------------------------------------------
 BUG FIXES:

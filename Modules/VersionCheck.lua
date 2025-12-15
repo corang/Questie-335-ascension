@@ -8,27 +8,37 @@ local WOW_PROJECT_WRATH_CLASSIC = QuestieCompat.WOW_PROJECT_WRATH_CLASSIC
 local WOW_PROJECT_ID = QuestieCompat.WOW_PROJECT_ID
 
 -- Check addon is not renamed to avoid conflicts in global name space.
+-- Allow both "Questie-335" and "Questie-335-ascension" folder names
 if (not QuestieCompat.Is335) and addonName ~= "Questie" then
-    local msg = { "You have renamed Questie addon.", "This is restricted to avoid issues.", "Please remove '"..addonName.."'", "and reinstall the original version."}
-    StaticPopupDialogs["QUESTIE_ADDON_NAME_ERROR"] = {
-        text = "|cffff0000ERROR|r\n"..msg[1].."\n"..msg[2].."\n\n"..msg[3].."\n"..msg[4],
-        button2 = "OK",
-        hasEditBox = false,
-        whileDead = true,
-        timeout = 0 -- 335
+    -- For Questie-335, allow flexible naming (Questie-335 or Questie-335-ascension)
+    local validNames = {
+        ["Questie"] = true,
+        ["Questie-335"] = true,
+        ["Questie-335-ascension"] = true
     }
+    
+    if not validNames[addonName] and not QuestieCompat.Is335 then
+        local msg = { "You have renamed Questie addon.", "This is restricted to avoid issues.", "Please remove '"..addonName.."'", "and reinstall the original version."}
+        StaticPopupDialogs["QUESTIE_ADDON_NAME_ERROR"] = {
+            text = "|cffff0000ERROR|r\n"..msg[1].."\n"..msg[2].."\n\n"..msg[3].."\n"..msg[4],
+            button2 = "OK",
+            hasEditBox = false,
+            whileDead = true,
+            timeout = 0 -- 335
+        }
 
-    C_Timer.After(4, function()
-        DEFAULT_CHAT_FRAME:AddMessage("---------------------------------")
-        DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[1].."|r")
-        DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[2].."|r")
-        DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[3].."|r")
-        DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[4].."|r")
-        DEFAULT_CHAT_FRAME:AddMessage("---------------------------------")
-        error("ERROR: "..msg[1].." "..msg[2].." "..msg[3])
-    end)
-    StaticPopup_Show("QUESTIE_ADDON_NAME_ERROR")
-    return
+        C_Timer.After(4, function()
+            DEFAULT_CHAT_FRAME:AddMessage("---------------------------------")
+            DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[1].."|r")
+            DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[2].."|r")
+            DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[3].."|r")
+            DEFAULT_CHAT_FRAME:AddMessage("|cffff0000ERROR|r: |cff42f5ad"..msg[4].."|r")
+            DEFAULT_CHAT_FRAME:AddMessage("---------------------------------")
+            error("ERROR: "..msg[1].." "..msg[2].." "..msg[3])
+        end)
+        StaticPopup_Show("QUESTIE_ADDON_NAME_ERROR")
+        return
+    end
 end
 
 if Questie then
