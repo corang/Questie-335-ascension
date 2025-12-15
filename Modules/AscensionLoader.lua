@@ -73,9 +73,10 @@ function AscensionLoader:FixMapCoordinates()
     }
     
     -- Apply fixes to NPC coords
-    if QuestieDB.npcData then
+    -- Check if npcData is a table (not a string) before iterating
+    if QuestieDB.npcData and type(QuestieDB.npcData) == "table" then
         for npcId, npcData in pairs(QuestieDB.npcData) do
-            if npcData.spawns then
+            if type(npcData) == "table" and npcData.spawns then
                 for zoneId, spawns in pairs(npcData.spawns) do
                     if mapFixes[zoneId] then
                         local fix = mapFixes[zoneId]
@@ -92,9 +93,9 @@ function AscensionLoader:FixMapCoordinates()
     end
     
     -- Apply fixes to Object coords
-    if QuestieDB.objectData then
+    if QuestieDB.objectData and type(QuestieDB.objectData) == "table" then
         for objectId, objectData in pairs(QuestieDB.objectData) do
-            if objectData.spawns then
+            if type(objectData) == "table" and objectData.spawns then
                 for zoneId, spawns in pairs(objectData.spawns) do
                     if mapFixes[zoneId] then
                         local fix = mapFixes[zoneId]
@@ -303,6 +304,12 @@ function AscensionLoader:UPDATE_MOUSEOVER_UNIT()
     end
     
     -- Store in database
+    -- Make sure npcData is initialized as a table
+    if type(QuestieDB.npcData) ~= "table" then
+        Questie:Debug(Questie.DEBUG_CRITICAL, "[AscensionLoader] WARNING: npcData is not a table, skipping NPC storage")
+        return
+    end
+    
     if not self.discoveredNPCs[npcId] then
         self.discoveredNPCs[npcId] = true
         QuestieDB.npcData[npcId] = npcEntry
