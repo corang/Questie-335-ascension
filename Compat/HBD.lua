@@ -325,7 +325,7 @@ local function UpdateMinimapPins(force)
         if MinimapRadiusAPI then
             mapRadius = C_Minimap.GetViewRadius()
         else
-            mapRadius = minimap_size[indoors][zoom] / 2
+            mapRadius = Minimap:GetViewRadius()
         end
 
         -- update upvalues for icon placement
@@ -401,7 +401,7 @@ local function UpdateMinimapIconPosition()
         if MinimapRadiusAPI then
             mapRadius = C_Minimap.GetViewRadius()
         else
-            mapRadius = minimap_size[indoors][zoom] / 2
+            mapRadius = Minimap:GetViewRadius()
         end
         -- update upvalues for icon placement
         lastXY, lastYY = x, y
