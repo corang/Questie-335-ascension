@@ -1,3 +1,6 @@
+---@type QuestieDB
+local QuestieDB = QuestieLoader:ImportModule("QuestieDB")
+
 -- Ascension WoW NPC Database
 -- Converted from pfQuest-ascension format
 -- NPC data specific to Ascension WoW servers

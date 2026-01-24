@@ -1,3 +1,6 @@
+---@type QuestieDB
+local QuestieDB = QuestieLoader:ImportModule("QuestieDB")
+
 -- Ascension WoW Item Database
 -- This file contains Ascension-specific item data
 -- Data is merged with the base Wotlk database when Ascension is detected
