@@ -329,6 +329,6 @@ function QuestieDB:LoadAscensionNpcData()
         end
     end
 
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccQuestie-335:|r |cFFFFFF00Ascension NPC database loaded (" .. 
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccQuestie-335:|r |cFFFFFF00Ascension NPC database loaded (" ..
         tostring(#QuestieDB.AscensionNpcDB) .. " NPCs).|r")
 end

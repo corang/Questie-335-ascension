@@ -15,7 +15,7 @@ function QuestieDB:LoadAscensionQuestData()
     if not QuestieCompat.IsAscension then
         return
     end
-    
+
     -- Ascension-specific quests will be added here
     DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccQuestie-335:|r |cFFFFFF00Ascension Quest database loaded.|r")
 end
