@@ -311,6 +311,14 @@ function QuestieCorrections:Initialize(validationTables)
 
     if QuestieCompat.Is335 then QuestieCompat.LoadCorrections(_LoadCorrections, validationTables) end
 
+    if QuestieCompat.IsAscension then
+        _LoadCorrections("npcData", QuestieDB.AscensionNpcDB, QuestieDB.npcKeysReversed, validationTables)
+        _LoadCorrections("itemData", QuestieDB.AscensionItemDB, QuestieDB.itemKeysReversed, validationTables)
+        _LoadCorrections("objectData", QuestieDB.AscensionObjectDB, QuestieDB.objectKeysReversed, validationTables)
+        _LoadCorrections("questData", QuestieDB.AscensionQuestDB, QuestieDB.questKeysReversed, validationTables)
+    end
+
+
     local patchCount = 0
     for _, quest in pairs(QuestieDB.questData) do
         if (not quest[QuestieDB.questKeys.requiredRaces]) or quest[QuestieDB.questKeys.requiredRaces] == 0 then
